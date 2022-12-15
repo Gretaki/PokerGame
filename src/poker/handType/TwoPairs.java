@@ -6,35 +6,41 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TwoPairs implements HandType {
+    static final Rank rank = Rank.TWO_PAIRS;
+    final List<Card> cards;
 
-    @Override
-    public Rank getRankType() {
-        return Rank.TWO_PAIRS;
+    public TwoPairs(List<Card> cards) {
+        this.cards = cards;
     }
 
     @Override
-    public boolean exist(List<Card> hand) {
-        return getTwoPairs(hand).count() == 2;
+    public boolean exist() {
+        return getTwoPairs(cards).count() == 2;
     }
 
     @Override
-    public int getHighestCardValue(List<Card> hand) {
-        return getTwoPairs(hand)
-            .max(Comparator.comparingInt(one -> one.get(0).getValue()))
+    public int getHighestCardValue() {
+        return getTwoPairs(cards)
+            .max(Comparator.comparingInt(one -> one.get(0).value()))
             .get()
             .get(0)
-            .getValue();
+            .value();
     }
 
     @Override
-    public List<Card> getHighestCards(List<Card> hand) {
-        return getTwoPairs(hand)
-            .max(Comparator.comparingInt(one -> one.get(0).getValue())).get();
+    public List<Card> getHighestCards() {
+        return getTwoPairs(cards)
+            .max(Comparator.comparingInt(one -> one.get(0).value())).get();
+    }
+
+    @Override
+    public Rank getRank() {
+        return rank;
     }
 
     private static Stream<List<Card>> getTwoPairs(List<Card> hand) {
         return hand.stream()
-            .collect(Collectors.groupingBy(Card::getValue))
+            .collect(Collectors.groupingBy(Card::value))
             .values()
             .stream()
             .filter(group -> group.size() == 2);
