@@ -1,3 +1,5 @@
+package poker.handType;
+
 public enum Rank {
     STRAIGHT_FLUSH(0),
     FOUR_OF_A_KIND(1),

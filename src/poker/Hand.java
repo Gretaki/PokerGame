@@ -1,26 +1,16 @@
+package poker;
+
+import poker.handType.*;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Hand {
-    private Card[] hand;
-    private Rank rank;
-
-    private int highestCard;
-
-    public Hand(String handString) {
-        String[] cards = handString.split(" ");
-        hand = new Card[cards.length];
-        for (int i = 0; i < cards.length; i++) {
-            hand[i] = new Card(cards[i]);
-        }
-        Arrays.sort(hand, Comparator.comparing(Card::getValue));
-    }
+    private final List<Card> hand;
 
     public Hand(List<Card> listOfCards) {
-        hand = listOfCards.toArray(new Card[0]);
+        hand = listOfCards;
     }
 
     public Hand getHandWithoutHighestCardsInRank() {
@@ -39,7 +29,7 @@ public class Hand {
         }
 
         List<Card> finalCardsToBeDeleted = cardsToBeDeleted;
-        List<Card> toKeep = Arrays.stream(hand).filter(a -> !finalCardsToBeDeleted.contains(a)).collect(Collectors.toList());
+        List<Card> toKeep = hand.stream().filter(a -> !finalCardsToBeDeleted.contains(a)).collect(Collectors.toList());
         return new Hand(toKeep);
     }
 
