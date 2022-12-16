@@ -1,39 +1,38 @@
 package poker.handType;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Combined implements HandType {
     final Rank rank;
     final HandType firstClass;
     final HandType secondClass;
 
-    public Combined(HandType firstClass, HandType secondClass, Rank rank) {
+    private Combined(HandType firstClass, HandType secondClass, Rank rank) {
         this.firstClass = firstClass;
         this.secondClass = secondClass;
         this.rank = rank;
     }
 
-    @Override
-    public boolean exist() {
-        return this.firstClass.exist() && this.secondClass.exist();
+    public static Optional<HandType> build(Optional<HandType> maybeFirstClass, Optional<HandType> maybeSecondClass, Rank rank) {
+        return maybeFirstClass.flatMap(firstClass -> maybeSecondClass.map(secondClass -> new Combined(firstClass, secondClass, rank)));
     }
+
 
     @Override
     public int getHighestCardValue() {
-        if (rank == Rank.STRAIGHT_FLUSH || rank == Rank.FULL_HOUSE) {
+        if (firstClass.getRank().number > secondClass.getRank().number) {
             return firstClass.getHighestCardValue();
         }
-
-        throw new IllegalStateException("nesamone");
+        return secondClass.getHighestCardValue();
     }
 
     @Override
     public List<Card> getHighestCards() {
-        if (rank == Rank.STRAIGHT_FLUSH || rank == Rank.FULL_HOUSE) {
+        if (firstClass.getRank().number > secondClass.getRank().number) {
             return firstClass.getHighestCards();
         }
-
-        throw new IllegalStateException("nesamone");
+        return secondClass.getHighestCards();
     }
 
     @Override

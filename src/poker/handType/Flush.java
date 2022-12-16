@@ -2,22 +2,23 @@ package poker.handType;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Flush implements HandType {
     static final Rank rank = Rank.FLUSH;
     final List<Card> cards;
 
-    public Flush(List<Card> cards) {
+    private Flush(List<Card> cards) {
         this.cards = cards;
     }
 
-    @Override
-    public boolean exist() {
-        return cards.stream()
-            .map(Card::suit)
-            .collect(Collectors.toSet())
-            .size() == 1;
+    public static Optional<HandType> build(List<Card> cards) {
+        if (exist(cards)) {
+            return Optional.of(new Flush(cards));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -33,5 +34,12 @@ public class Flush implements HandType {
     @Override
     public Rank getRank() {
         return rank;
+    }
+
+    private static boolean exist(List<Card> cards) {
+        return cards.stream()
+            .map(Card::suit)
+            .collect(Collectors.toSet())
+            .size() == 1;
     }
 }

@@ -1,15 +1,15 @@
 package poker.handType;
 
 public enum Rank {
-    STRAIGHT_FLUSH(0),
-    FOUR_OF_A_KIND(1),
-    FULL_HOUSE(2),
-    FLUSH(3),
+    STRAIGHT_FLUSH(8),
+    FOUR_OF_A_KIND(7),
+    FULL_HOUSE(6),
+    FLUSH(5),
     STRAIGHT(4),
-    THREE_OF_A_KIND(5),
-    TWO_PAIRS(6),
-    ONE_PAIR(7),
-    HIGH_CARD(8);
+    THREE_OF_A_KIND(3),
+    TWO_PAIRS(2),
+    ONE_PAIR(1),
+    HIGH_CARD(0);
 
     public final int number;
 

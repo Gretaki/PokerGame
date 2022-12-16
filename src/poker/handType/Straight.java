@@ -7,21 +7,18 @@ public class Straight implements HandType {
     static final Rank rank = Rank.STRAIGHT;
     final List<Card> cards;
 
-    public Straight(List<Card> cards) {
+    private Straight(List<Card> cards) {
         this.cards = cards;
     }
 
-    @Override
-    public boolean exist() {
-        int min = cards.get(0).value();
-        int max = cards.get(cards.size() - 1).value();
-        Set<Integer> values = cards.stream().map(Card::value).collect(Collectors.toSet());
-        var valuesWithAceAsOne = new HashSet<>(Arrays.asList(2, 3, 4, 5, 14));
-
-        return values.size() == 5
-            && (min == max - 4) || (values.equals(valuesWithAceAsOne));
+    public static Optional<HandType> build(List<Card> cards) {
+        if (exist(cards)) {
+            return Optional.of(new Straight(cards));
+        } else {
+            return Optional.empty();
+        }
     }
-
+    
     @Override
     public int getHighestCardValue() {
         return cards.get(cards.size() - 1).value();
@@ -35,5 +32,15 @@ public class Straight implements HandType {
     @Override
     public Rank getRank() {
         return rank;
+    }
+
+    private static boolean exist(List<Card> cards) {
+        int min = cards.get(0).value();
+        int max = cards.get(cards.size() - 1).value();
+        Set<Integer> values = cards.stream().map(Card::value).collect(Collectors.toSet());
+        var valuesWithAceAsOne = new HashSet<>(Arrays.asList(2, 3, 4, 5, 14));
+
+        return values.size() == 5
+            && (min == max - 4) || (values.equals(valuesWithAceAsOne));
     }
 }

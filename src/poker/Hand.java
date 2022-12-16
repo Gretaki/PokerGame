@@ -3,7 +3,9 @@ package poker;
 import poker.handType.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Hand {
@@ -28,29 +30,28 @@ public class Hand {
     }
 
     private HandType getHighestHandType() {
-        return getAllHandTypes()
+        return getAllValidHandTypes()
             .stream()
-            .filter(HandType::exist)
-            .findFirst()
+            .max(Comparator.comparingInt(type -> type.getRank().number))
             .orElseThrow(() -> new IllegalStateException("No HandType exists within given cards"));
     }
 
-    private List<HandType> getAllHandTypes() {
-        var allHandTypes = new ArrayList<HandType>();
+    private List<HandType> getAllValidHandTypes() {
+        var allHandTypes = new ArrayList<Optional<HandType>>();
 
-        allHandTypes.add(new Combined(new Straight(cards), new Flush(cards), Rank.STRAIGHT_FLUSH));
-        allHandTypes.add(new NOfAKind(4, Rank.FOUR_OF_A_KIND, cards));
-        allHandTypes.add(new Combined(
-            new NOfAKind(3, cards),
-            new NOfAKind(2, cards),
+        allHandTypes.add(Combined.build(Straight.build(cards), Flush.build(cards), Rank.STRAIGHT_FLUSH));
+        allHandTypes.add(NOfAKind.build(4, cards, Optional.of(Rank.FOUR_OF_A_KIND)));
+        allHandTypes.add(Combined.build(
+            NOfAKind.build(3, cards),
+            NOfAKind.build(2, cards),
             Rank.FULL_HOUSE));
-        allHandTypes.add(new Flush(cards));
-        allHandTypes.add(new Straight(cards));
-        allHandTypes.add(new NOfAKind(3, Rank.THREE_OF_A_KIND, cards));
-        allHandTypes.add(new TwoPairs(cards));
-        allHandTypes.add(new NOfAKind(2, Rank.ONE_PAIR, cards));
-        allHandTypes.add(new HighCard(cards));
+        allHandTypes.add(Flush.build(cards));
+        allHandTypes.add(Straight.build(cards));
+        allHandTypes.add(NOfAKind.build(3, cards, Optional.of(Rank.THREE_OF_A_KIND)));
+        allHandTypes.add(TwoPairs.build(cards));
+        allHandTypes.add(NOfAKind.build(2, cards, Optional.of(Rank.ONE_PAIR)));
+        allHandTypes.add(HighCard.build(cards));
 
-        return allHandTypes;
+        return allHandTypes.stream().flatMap(Optional::stream).collect(Collectors.toList());
     }
 }

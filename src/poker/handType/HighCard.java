@@ -2,18 +2,22 @@ package poker.handType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class HighCard implements HandType {
     static final Rank rank = Rank.HIGH_CARD;
     final List<Card> cards;
 
-    public HighCard(List<Card> cards) {
+    private HighCard(List<Card> cards) {
         this.cards = cards;
     }
 
-    @Override
-    public boolean exist() {
-        return true;
+    public static Optional<HandType> build(List<Card> cards) {
+        if (cards.size() > 0) {
+            return Optional.of(new HighCard(cards));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

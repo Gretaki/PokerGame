@@ -5,42 +5,41 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class NOfAKind implements HandType {
-    final Rank rank;
-    final List<Card> cards;
     final int number;
+    final List<Card> cards;
+    final Rank rank;
 
-    public NOfAKind(int number, List<Card> cards) {
-        this.number = number;
-        this.cards = cards;
-        this.rank = null;
+    private NOfAKind(int number, List<Card> cards) {
+        this(number, cards, null);
     }
 
-    public NOfAKind(int number, Rank rank, List<Card> cards) {
+    private NOfAKind(int number, List<Card> cards, Rank rank) {
         this.number = number;
+        this.cards = cards;
         this.rank = rank;
-        this.cards = cards;
     }
 
+    public static Optional<HandType> build(int number, List<Card> cards) {
+        return build(number, cards, Optional.empty());
+    }
 
-    @Override
-    public boolean exist() {
-        return cards.stream()
-            .collect(Collectors.groupingBy(Card::value))
-            .values()
-            .stream()
-            .anyMatch(group -> group.size() == number);
+    public static Optional<HandType> build(int number, List<Card> cards, Optional<Rank> rank) {
+        if (exist(number, cards)) {
+            return Optional.of(rank.map(r -> new NOfAKind(number, cards, r)).orElse(new NOfAKind(number, cards)));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public int getHighestCardValue() {
-        Optional<List<Card>> a = getCards(cards);
-        return a.get().get(0).value();
+        return getHandTypeCards(cards).get(0).value();
 
     }
 
     @Override
     public List<Card> getHighestCards() {
-        return getCards(cards).get();
+        return getHandTypeCards(cards);
     }
 
     @Override
@@ -48,11 +47,21 @@ public class NOfAKind implements HandType {
         return rank;
     }
 
-    private Optional<List<Card>> getCards(List<Card> hand) {
+    private static boolean exist(int number, List<Card> cards) {
+        return cards.stream()
+            .collect(Collectors.groupingBy(Card::value))
+            .values()
+            .stream()
+            .anyMatch(group -> group.size() == number);
+    }
+
+    private List<Card> getHandTypeCards(List<Card> hand) {
         return hand.stream()
             .collect(Collectors.groupingBy(Card::value))
             .values()
             .stream()
-            .filter(group -> group.size() == number).findFirst();
+            .filter(group -> group.size() == number)
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("No HandType exists within given cards"));
     }
 }
