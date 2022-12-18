@@ -1,4 +1,4 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +34,6 @@ public class NOfAKind implements HandType {
     @Override
     public int getHighestCardValue() {
         return getHandTypeCards(cards).get(0).value();
-
     }
 
     @Override

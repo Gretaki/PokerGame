@@ -1,10 +1,9 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Straight implements HandType {
-    static final Rank rank = Rank.STRAIGHT;
     final List<Card> cards;
 
     private Straight(List<Card> cards) {
@@ -31,7 +30,7 @@ public class Straight implements HandType {
 
     @Override
     public Rank getRank() {
-        return rank;
+        return Rank.STRAIGHT;
     }
 
     private static boolean exist(List<Card> cards) {

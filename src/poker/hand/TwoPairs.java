@@ -1,4 +1,4 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.Comparator;
 import java.util.List;
@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TwoPairs implements HandType {
-    static final Rank rank = Rank.TWO_PAIRS;
     final List<Card> cards;
 
     private TwoPairs(List<Card> cards) {
@@ -39,7 +38,7 @@ public class TwoPairs implements HandType {
 
     @Override
     public Rank getRank() {
-        return rank;
+        return Rank.TWO_PAIRS;
     }
 
     private static Stream<List<Card>> getTwoPairs(List<Card> hand) {

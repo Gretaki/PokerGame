@@ -1,5 +1,7 @@
 package poker;
 
+import poker.hand.Hand;
+
 public record Match(Hand player1, Hand player2) {
 
     public boolean player1Wins() {

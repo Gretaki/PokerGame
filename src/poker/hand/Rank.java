@@ -1,4 +1,4 @@
-package poker.handType;
+package poker.hand;
 
 public enum Rank {
     STRAIGHT_FLUSH(8),

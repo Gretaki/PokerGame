@@ -1,4 +1,4 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.List;
 

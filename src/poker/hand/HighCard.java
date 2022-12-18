@@ -1,11 +1,10 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class HighCard implements HandType {
-    static final Rank rank = Rank.HIGH_CARD;
     final List<Card> cards;
 
     private HighCard(List<Card> cards) {
@@ -34,6 +33,6 @@ public class HighCard implements HandType {
 
     @Override
     public Rank getRank() {
-        return rank;
+        return Rank.HIGH_CARD;
     }
 }

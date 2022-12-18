@@ -1,4 +1,4 @@
-package poker.handType;
+package poker.hand;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Flush implements HandType {
-    static final Rank rank = Rank.FLUSH;
     final List<Card> cards;
 
     private Flush(List<Card> cards) {
@@ -33,7 +32,7 @@ public class Flush implements HandType {
 
     @Override
     public Rank getRank() {
-        return rank;
+        return Rank.FLUSH;
     }
 
     private static boolean exist(List<Card> cards) {

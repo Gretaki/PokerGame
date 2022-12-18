@@ -1,6 +1,4 @@
-package poker;
-
-import poker.handType.*;
+package poker.hand;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -42,8 +40,8 @@ public class Hand {
         allHandTypes.add(Combined.build(Straight.build(cards), Flush.build(cards), Rank.STRAIGHT_FLUSH));
         allHandTypes.add(NOfAKind.build(4, cards, Optional.of(Rank.FOUR_OF_A_KIND)));
         allHandTypes.add(Combined.build(
-            NOfAKind.build(3, cards),
-            NOfAKind.build(2, cards),
+            NOfAKind.build(3, cards, Optional.of(Rank.THREE_OF_A_KIND)),
+            NOfAKind.build(2, cards, Optional.of(Rank.ONE_PAIR)),
             Rank.FULL_HOUSE));
         allHandTypes.add(Flush.build(cards));
         allHandTypes.add(Straight.build(cards));
