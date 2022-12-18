@@ -38,16 +38,16 @@ public class Hand {
         var allHandTypes = new ArrayList<Optional<HandType>>();
 
         allHandTypes.add(Combined.build(Straight.build(cards), Flush.build(cards), Rank.STRAIGHT_FLUSH));
-        allHandTypes.add(NOfAKind.build(4, cards, Optional.of(Rank.FOUR_OF_A_KIND)));
+        allHandTypes.add(NOfAKind.build(4, cards, Rank.FOUR_OF_A_KIND));
         allHandTypes.add(Combined.build(
-            NOfAKind.build(3, cards, Optional.of(Rank.THREE_OF_A_KIND)),
-            NOfAKind.build(2, cards, Optional.of(Rank.ONE_PAIR)),
+            NOfAKind.build(3, cards, Rank.THREE_OF_A_KIND),
+            NOfAKind.build(2, cards, Rank.ONE_PAIR),
             Rank.FULL_HOUSE));
         allHandTypes.add(Flush.build(cards));
         allHandTypes.add(Straight.build(cards));
-        allHandTypes.add(NOfAKind.build(3, cards, Optional.of(Rank.THREE_OF_A_KIND)));
+        allHandTypes.add(NOfAKind.build(3, cards, Rank.THREE_OF_A_KIND));
         allHandTypes.add(TwoPairs.build(cards));
-        allHandTypes.add(NOfAKind.build(2, cards, Optional.of(Rank.ONE_PAIR)));
+        allHandTypes.add(NOfAKind.build(2, cards, Rank.ONE_PAIR));
         allHandTypes.add(HighCard.build(cards));
 
         return allHandTypes.stream().flatMap(Optional::stream).collect(Collectors.toList());

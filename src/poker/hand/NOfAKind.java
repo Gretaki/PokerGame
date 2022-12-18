@@ -9,23 +9,15 @@ public class NOfAKind implements HandType {
     final List<Card> cards;
     final Rank rank;
 
-    private NOfAKind(int number, List<Card> cards) {
-        this(number, cards, null);
-    }
-
     private NOfAKind(int number, List<Card> cards, Rank rank) {
         this.number = number;
         this.cards = cards;
         this.rank = rank;
     }
 
-    public static Optional<HandType> build(int number, List<Card> cards) {
-        return build(number, cards, Optional.empty());
-    }
-
-    public static Optional<HandType> build(int number, List<Card> cards, Optional<Rank> rank) {
+    public static Optional<HandType> build(int number, List<Card> cards, Rank rank) {
         if (exist(number, cards)) {
-            return Optional.of(rank.map(r -> new NOfAKind(number, cards, r)).orElse(new NOfAKind(number, cards)));
+            return Optional.of(new NOfAKind(number, cards, rank));
         } else {
             return Optional.empty();
         }

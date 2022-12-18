@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderTest {
-    FileReader fileReader;
     String inputFile = "test/poker/inputTest.txt";
     String nonExistingInputFile = "test/poker/inputNonExistingTest.txt";
 
@@ -20,7 +19,7 @@ class FileReaderTest {
     @Test
     @DisplayName("return list of strings from correct existing input file")
     void testFileReader() throws FileNotFoundException {
-        fileReader = new FileReader(inputFile);
+        FileReader fileReader = new FileReader(inputFile);
 
         List<String> expectedResult = Arrays.asList("5H 5C 6S 7S KD 2C 3S 8S 8D TD",
             "5D 8C 9S JS AC 2C 5C 7D 8S QH",
@@ -34,8 +33,8 @@ class FileReaderTest {
     @Test
     @DisplayName("throw file not found exception when given file path not exists")
     void testFileReaderWithNonExistingPath() {
-        fileReader = new FileReader(nonExistingInputFile);
+        FileReader fileReader = new FileReader(nonExistingInputFile);
 
-        assertThrows(FileNotFoundException.class, () -> fileReader.read());
+        assertThrows(FileNotFoundException.class, fileReader::read);
     }
 }

@@ -21,7 +21,10 @@ class CombinedTest {
     @DisplayName("return true in full house optional when cards have full house")
     void testBuildWithFullHouseCards() {
         Optional<HandType> fullHouse = Combined
-            .build(NOfAKind.build(3, cardsWithFullHouse), NOfAKind.build(2, cardsWithFullHouse), Rank.FULL_HOUSE);
+            .build(
+                NOfAKind.build(3, cardsWithFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE);
         assertTrue(fullHouse.isPresent());
     }
 
@@ -29,7 +32,10 @@ class CombinedTest {
     @DisplayName("return false in full house optional when no full house in cards")
     void testBuildWithoutFullHouseCards() {
         Optional<HandType> fullHouse = Combined
-            .build(NOfAKind.build(3, cardsWithoutFullHouse), NOfAKind.build(2, cardsWithoutFullHouse), Rank.FULL_HOUSE);
+            .build(
+                NOfAKind.build(3, cardsWithoutFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithoutFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE);
         assertFalse(fullHouse.isPresent());
     }
 
@@ -37,7 +43,10 @@ class CombinedTest {
     @DisplayName("return highest card value when cards have full house")
     void getHighestCardValueWithFullHouseCards() {
         Optional<Integer> fullHouseHighestCardValue = Combined
-            .build(NOfAKind.build(3, cardsWithFullHouse), NOfAKind.build(2, cardsWithFullHouse), Rank.FULL_HOUSE)
+            .build(
+                NOfAKind.build(3, cardsWithFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE)
             .map(HandType::getHighestCardValue);
         assertEquals(Optional.of(highCards.get(0).value()), fullHouseHighestCardValue);
     }
@@ -46,7 +55,10 @@ class CombinedTest {
     @DisplayName("return optional empty in highest card value when no full house in cards")
     void getHighestCardValueWithoutFullHouseCards() {
         Optional<Integer> fullHouseHighestCardValue = Combined
-            .build(NOfAKind.build(3, cardsWithoutFullHouse), NOfAKind.build(2, cardsWithoutFullHouse), Rank.FULL_HOUSE)
+            .build(
+                NOfAKind.build(3, cardsWithoutFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithoutFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE)
             .map(HandType::getHighestCardValue);
         assertEquals(Optional.empty(), fullHouseHighestCardValue);
     }
@@ -56,8 +68,8 @@ class CombinedTest {
     void getHighestCardsWithFullHouseCards() {
         Optional<List<Card>> fullHouseHighestCards = Combined
             .build(
-                NOfAKind.build(3, cardsWithFullHouse), 
-                NOfAKind.build(2, cardsWithFullHouse), 
+                NOfAKind.build(3, cardsWithFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithFullHouse, Rank.ONE_PAIR),
                 Rank.FULL_HOUSE)
             .map(HandType::getHighestCards);
         assertEquals(Optional.of(highCards), fullHouseHighestCards);
@@ -67,7 +79,10 @@ class CombinedTest {
     @DisplayName("return optional empty in highest card when no full house in cards")
     void getHighestCardsWithoutFullHouseCards() {
         Optional<List<Card>> fullHouseHighestCards = Combined
-            .build(NOfAKind.build(3, cardsWithoutFullHouse), NOfAKind.build(2, cardsWithoutFullHouse), Rank.FULL_HOUSE)
+            .build(
+                NOfAKind.build(3, cardsWithoutFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithoutFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE)
             .map(HandType::getHighestCards);
         assertEquals(Optional.empty(), fullHouseHighestCards);
     }
@@ -76,7 +91,10 @@ class CombinedTest {
     @DisplayName("return full house rank when cards have full house")
     void testGetRankWithFullHouseCards() {
         Optional<Rank> fullHouseRank = Combined
-            .build(NOfAKind.build(3, cardsWithFullHouse), NOfAKind.build(2, cardsWithFullHouse), Rank.FULL_HOUSE)
+            .build(
+                NOfAKind.build(3, cardsWithFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE)
             .map(HandType::getRank);
         assertEquals(Optional.of(Rank.FULL_HOUSE), fullHouseRank);
     }
@@ -85,7 +103,10 @@ class CombinedTest {
     @DisplayName("return optional empty in rank when no full house in cards")
     void testGetRankWithoutFullHouseCards() {
         Optional<Rank> fullHouseRank = Combined
-            .build(NOfAKind.build(3, cardsWithoutFullHouse), NOfAKind.build(2, cardsWithoutFullHouse), Rank.FULL_HOUSE)
+            .build(
+                NOfAKind.build(3, cardsWithoutFullHouse, Rank.THREE_OF_A_KIND),
+                NOfAKind.build(2, cardsWithoutFullHouse, Rank.ONE_PAIR),
+                Rank.FULL_HOUSE)
             .map(HandType::getRank);
         assertEquals(Optional.empty(), fullHouseRank);
     }
