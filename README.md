@@ -8,6 +8,7 @@
 Input is from txt file.  
 Main program is in Main class.  
 Output is shown in console window.
+![Poker diagram](PokerDiagram.png)
 ---
 ### OOP ideas:
 * abstraction 
