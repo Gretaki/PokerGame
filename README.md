@@ -2,6 +2,10 @@
 ## Problem 54 ([Resource](https://projecteuler.net/problem=54))
 
 ---
+### Technologies:
+* Java 18
+* Maven
+* Junit 5
 
 ### How the solution works:
 
