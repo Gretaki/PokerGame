@@ -2,9 +2,7 @@ import hand.Card;
 import hand.Suit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputParser {
     private final List<String> inputLines;

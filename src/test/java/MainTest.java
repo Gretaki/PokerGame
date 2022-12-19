@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MainTest {
-    String inputFile = "test/inputTest.txt";
+    String inputFile = "src/test/inputTest.txt";
 
     @Test
     @DisplayName("return player1 win count")

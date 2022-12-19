@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderTest {
-    String inputFile = "test/inputTest.txt";
-    String nonExistingInputFile = "test/inputNonExistingTest.txt";
+    String inputFile = "src/test/inputTest.txt";
+    String nonExistingInputFile = "src/test/inputNonExistingTest.txt";
 
 
     @Test
