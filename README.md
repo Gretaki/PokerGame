@@ -1,14 +1,20 @@
 # Poker hands
-## Problem 54
-[Resource](https://projecteuler.net/problem=54)
+## Problem 54 ([Resource](https://projecteuler.net/problem=54))
 
 ---
 
 ### How the solution works:
-Input is from txt file.  
-Main program is in Main class.  
-Output is shown in console window.
-![Poker diagram](PokerDiagram.png)
+
+Main idea:
+* Input is from txt file.  
+* Main program is in Main class.  
+* Output is shown in console window.
+
+Diagram:
+<p align="center">
+  <img src="PokerDiagram.png" alt="Solution of Poker hands diagram"/>
+</p>
+
 ---
 ### OOP ideas:
 * abstraction 
