@@ -1,9 +1,5 @@
 package hand;
 
-import hand.Card;
-import hand.HandType;
-import hand.HighCard;
-import hand.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
