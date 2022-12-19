@@ -1,6 +1,4 @@
-package poker;
-
-import poker.hand.Card;
+import hand.Card;
 
 import java.util.ArrayList;
 import java.util.List;

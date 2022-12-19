@@ -1,4 +1,4 @@
-package poker.hand;
+package hand;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

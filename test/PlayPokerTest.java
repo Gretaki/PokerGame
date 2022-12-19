@@ -1,12 +1,10 @@
-package poker;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import poker.hand.Card;
+import hand.Card;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayPokerTest {
     List<Card> inputCardsWithPlayer1Win = List.of(

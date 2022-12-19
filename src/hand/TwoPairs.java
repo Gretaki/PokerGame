@@ -1,4 +1,4 @@
-package poker.hand;
+package hand;
 
 import java.util.Comparator;
 import java.util.List;

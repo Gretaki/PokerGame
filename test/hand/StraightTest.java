@@ -1,5 +1,9 @@
-package poker.hand;
+package hand;
 
+import hand.Card;
+import hand.HandType;
+import hand.Rank;
+import hand.Straight;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

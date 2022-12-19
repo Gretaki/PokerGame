@@ -1,8 +1,5 @@
-package poker;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import poker.FileReader;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -12,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderTest {
-    String inputFile = "test/poker/inputTest.txt";
-    String nonExistingInputFile = "test/poker/inputNonExistingTest.txt";
+    String inputFile = "test/inputTest.txt";
+    String nonExistingInputFile = "test/inputNonExistingTest.txt";
 
 
     @Test

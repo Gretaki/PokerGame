@@ -1,6 +1,4 @@
-package poker;
-
-import poker.hand.Hand;
+import hand.Hand;
 
 public record Match(Hand player1, Hand player2) {
 

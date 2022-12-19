@@ -1,13 +1,11 @@
-package poker;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import poker.hand.Card;
-import poker.hand.Hand;
+import hand.Card;
+import hand.Hand;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MatchTest {
     Hand play1Hand = new Hand(List.of(

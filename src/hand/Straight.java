@@ -1,4 +1,4 @@
-package poker.hand;
+package hand;
 
 import java.util.*;
 import java.util.stream.Collectors;
