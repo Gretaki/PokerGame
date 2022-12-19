@@ -9,21 +9,21 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FlushTest {
-    Card highCard = new Card(13, 'D');
+    Card highCard = new Card(13, Suit.D);
     List<Card> cardsWithFlush = List.of(
-        new Card(4, 'D'), new Card(6, 'D'), new Card(9, 'D'), new Card(12, 'D'), highCard);
+        new Card(4, Suit.D), new Card(6, Suit.D), new Card(9, Suit.D), new Card(12, Suit.D), highCard);
     List<Card> cardsWithoutFlush = List.of(
-        new Card(4, 'D'), new Card(6, 'S'), new Card(9, 'H'), new Card(12, 'H'), new Card(12, 'C'));
+        new Card(4, Suit.D), new Card(6, Suit.S), new Card(9, Suit.H), new Card(12, Suit.H), new Card(12, Suit.C));
 
     @Test
-    @DisplayName("return true in flush optional when cards have flush")
+    @DisplayName("return non empty optional when cards have flush")
     void testBuildWithFlushCards() {
         Optional<HandType> flush = Flush.build(cardsWithFlush);
         assertTrue(flush.isPresent());
     }
 
     @Test
-    @DisplayName("return false in flush optional when no flush in cards")
+    @DisplayName("return empty optional when no flush in cards")
     void testBuildWithoutFlushCards() {
         Optional<HandType> flush = Flush.build(cardsWithoutFlush);
         assertFalse(flush.isPresent());
@@ -31,30 +31,16 @@ class FlushTest {
 
     @Test
     @DisplayName("return highest card value when cards have flush")
-    void getHighestCardValueWithFlushCards() {
+    void testGetHighestCardValueWithFlushCards() {
         Optional<Integer> flushHighestCardValue = Flush.build(cardsWithFlush).map(HandType::getHighestCardValue);
         assertEquals(Optional.of(highCard.value()), flushHighestCardValue);
     }
 
     @Test
-    @DisplayName("return optional empty in highest card value when no flush in cards")
-    void getHighestCardValueWithoutFlushCards() {
-        Optional<Integer> flushHighestCardValue = Flush.build(cardsWithoutFlush).map(HandType::getHighestCardValue);
-        assertEquals(Optional.empty(), flushHighestCardValue);
-    }
-
-    @Test
     @DisplayName("return highest card when cards have flush")
-    void getHighestCardsWithFlushCards() {
+    void testGetHighestCardsWithFlushCards() {
         Optional<List<Card>> flushHighestCards = Flush.build(cardsWithFlush).map(HandType::getHighestCards);
         assertEquals(Optional.of(List.of(highCard)), flushHighestCards);
-    }
-
-    @Test
-    @DisplayName("return optional empty in highest card when no flush in cards")
-    void getHighestCardsWithoutFlushCards() {
-        Optional<List<Card>> flushHighestCards = Flush.build(cardsWithoutFlush).map(HandType::getHighestCards);
-        assertEquals(Optional.empty(), flushHighestCards);
     }
 
     @Test
@@ -62,12 +48,5 @@ class FlushTest {
     void testGetRankWithFlushCards() {
         Optional<Rank> flushRank = Flush.build(cardsWithFlush).map(HandType::getRank);
         assertEquals(Optional.of(Rank.FLUSH), flushRank);
-    }
-
-    @Test
-    @DisplayName("return optional empty in rank when no flush in cards")
-    void testGetRankWithoutFlushCards() {
-        Optional<Rank> flushRank = Flush.build(cardsWithoutFlush).map(HandType::getRank);
-        assertEquals(Optional.empty(), flushRank);
     }
 }

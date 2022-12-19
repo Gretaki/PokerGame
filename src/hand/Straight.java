@@ -37,7 +37,7 @@ public class Straight implements HandType {
         int min = cards.get(0).value();
         int max = cards.get(cards.size() - 1).value();
         Set<Integer> values = cards.stream().map(Card::value).collect(Collectors.toSet());
-        var valuesWithAceAsOne = new HashSet<>(Arrays.asList(2, 3, 4, 5, 14));
+        var valuesWithAceAsOne = new HashSet<>(Arrays.asList(0, 1, 2, 3, 12));
 
         return values.size() == 5
             && (min == max - 4) || (values.equals(valuesWithAceAsOne));

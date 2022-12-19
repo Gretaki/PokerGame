@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReader {
-    private final String inputFile;
+    private final String inputFilePath;
 
-    public FileReader(String inputFile) {
-        this.inputFile = inputFile;
+    public FileReader(String inputFilePath) {
+        this.inputFilePath = inputFilePath;
     }
 
     public List<String> read() throws FileNotFoundException {
-        File file = new File(inputFile);
+        File file = new File(inputFilePath);
         Scanner sc = new Scanner(file);
         var input = new ArrayList<String>();
 
@@ -20,6 +20,8 @@ public class FileReader {
             String inputLine = sc.nextLine().trim();
             input.add(inputLine);
         }
+        
+        sc.close();
         return input;
     }
 }

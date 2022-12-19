@@ -10,21 +10,21 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TwoPairsTest {
-    List<Card> highCards = List.of(new Card(13, 'H'), new Card(13, 'D'));
+    List<Card> highCards = List.of(new Card(13, Suit.H), new Card(13, Suit.D));
     List<Card> cardsWithTwoPairs = Stream.concat(Stream.of(
-        new Card(4, 'D'), new Card(6, 'D'), new Card(6, 'H')), highCards.stream()).toList();
+        new Card(4, Suit.D), new Card(6, Suit.D), new Card(6, Suit.H)), highCards.stream()).toList();
     List<Card> cardsWithoutTwoPairs = List.of(
-        new Card(4, 'D'), new Card(6, 'S'), new Card(9, 'H'), new Card(12, 'H'), new Card(12, 'C'));
+        new Card(4, Suit.D), new Card(6, Suit.S), new Card(9, Suit.H), new Card(12, Suit.H), new Card(12, Suit.C));
 
     @Test
-    @DisplayName("return true in two pairs optional when cards have two pairs")
+    @DisplayName("return non empty optional when cards have two pairs")
     void testBuildWithTwoPairsCards() {
         Optional<HandType> twoPairs = TwoPairs.build(cardsWithTwoPairs);
         assertTrue(twoPairs.isPresent());
     }
 
     @Test
-    @DisplayName("return false in two pairs optional when no two pairs in cards")
+    @DisplayName("return empty optional when no two pairs in cards")
     void testBuildWithoutTwoPairsCards() {
         Optional<HandType> twoPairs = TwoPairs.build(cardsWithoutTwoPairs);
         assertFalse(twoPairs.isPresent());
@@ -32,30 +32,16 @@ class TwoPairsTest {
 
     @Test
     @DisplayName("return highest card value when cards have two pairs")
-    void getHighestCardValueWithTwoPairsCards() {
+    void testGetHighestCardValueWithTwoPairsCards() {
         Optional<Integer> twoPairsHighestCardValue = TwoPairs.build(cardsWithTwoPairs).map(HandType::getHighestCardValue);
         assertEquals(Optional.of(highCards.get(0).value()), twoPairsHighestCardValue);
     }
 
     @Test
-    @DisplayName("return optional empty in highest card value when no two pairs in cards")
-    void getHighestCardValueWithoutTwoPairsCards() {
-        Optional<Integer> twoPairsHighestCardValue = TwoPairs.build(cardsWithoutTwoPairs).map(HandType::getHighestCardValue);
-        assertEquals(Optional.empty(), twoPairsHighestCardValue);
-    }
-
-    @Test
     @DisplayName("return highest card when cards have two pairs")
-    void getHighestCardsWithTwoPairsCards() {
+    void testGetHighestCardsWithTwoPairsCards() {
         Optional<List<Card>> twoPairsHighestCards = TwoPairs.build(cardsWithTwoPairs).map(HandType::getHighestCards);
         assertEquals(Optional.of(highCards), twoPairsHighestCards);
-    }
-
-    @Test
-    @DisplayName("return optional empty in highest card when no two pairs in cards")
-    void getHighestCardsWithoutTwoPairsCards() {
-        Optional<List<Card>> twoPairsHighestCards = TwoPairs.build(cardsWithoutTwoPairs).map(HandType::getHighestCards);
-        assertEquals(Optional.empty(), twoPairsHighestCards);
     }
 
     @Test
@@ -63,12 +49,5 @@ class TwoPairsTest {
     void testGetRankWithTwoPairsCards() {
         Optional<Rank> twoPairsRank = TwoPairs.build(cardsWithTwoPairs).map(HandType::getRank);
         assertEquals(Optional.of(Rank.TWO_PAIRS), twoPairsRank);
-    }
-
-    @Test
-    @DisplayName("return optional empty in rank when no two pairs in cards")
-    void testGetRankWithoutTwoPairsCards() {
-        Optional<Rank> twoPairsRank = TwoPairs.build(cardsWithoutTwoPairs).map(HandType::getRank);
-        assertEquals(Optional.empty(), twoPairsRank);
     }
 }

@@ -7,7 +7,7 @@ class MainTest {
     String inputFile = "test/inputTest.txt";
 
     @Test
-    @DisplayName("return number one as player1 win when given input file with one match with player1 win")
+    @DisplayName("return player1 win count")
     void testMain() throws Exception {
         assertEquals(3, Main.getWinsOfPlayer1(inputFile));
     }

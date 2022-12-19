@@ -1,4 +1,4 @@
 package hand;
 
-public record Card(int value, char suit) {
+public record Card(int value, Suit suit) {
 }

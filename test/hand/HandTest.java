@@ -9,26 +9,26 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HandTest {
-    Card secondToHighCard = new Card(12, 'D');
-    Card highCard = new Card(13, 'D');
+    Card secondToHighCard = new Card(12, Suit.D);
+    Card highCard = new Card(13, Suit.D);
     List<Card> cardsWithFlush = Stream
-        .concat(Stream.of(new Card(4, 'D'), new Card(6, 'D'), new Card(9, 'D')), Stream.of(secondToHighCard, highCard))
+        .concat(Stream.of(new Card(4, Suit.D), new Card(6, Suit.D), new Card(9, Suit.D)), Stream.of(secondToHighCard, highCard))
         .toList();
 
     @Test
     @DisplayName("return second highest card when cards have flush")
-    void testGetHighestCardValueFromGetHandWithoutHighestCardsInFlushRank() {
+    void testGetHandWithoutHighestCardsInFlushRank() {
         Hand flush = new Hand(cardsWithFlush);
         assertEquals(secondToHighCard.value(), flush.getHandWithoutHighestCardsInRank().getHighestCardValue());
     }
 
     @Test
     @DisplayName("return second highest card when cards have three of a kind")
-    void testGetHighestCardValueFromGetHandWithoutHighestCardsInThreeOfAKindRank() {
-        List<Card> highCards = List.of(new Card(13, 'H'), new Card(13, 'D'), new Card(13, 'S'));
-        Card secondToHighCard = new Card(6, 'D');
-        List<Card> cardsWithThreeOfAKind = Stream.concat(Stream.of(
-            new Card(4, 'D'), secondToHighCard), highCards.stream()).toList();
+    void testGetHandWithoutHighestCardsInThreeOfAKindRank() {
+        List<Card> highCards = List.of(new Card(13, Suit.H), new Card(13, Suit.D), new Card(13, Suit.S));
+        Card secondToHighCard = new Card(6, Suit.D);
+        List<Card> cardsWithThreeOfAKind = Stream.concat(Stream.of( // TODO new ArrayList().addAll?
+            new Card(4, Suit.D), secondToHighCard), highCards.stream()).toList();
 
         Hand threeOfAKind = new Hand(cardsWithThreeOfAKind);
         assertEquals(secondToHighCard.value(), threeOfAKind.getHandWithoutHighestCardsInRank().getHighestCardValue());
@@ -42,7 +42,7 @@ class HandTest {
     }
 
     @Test
-    @DisplayName("return Flush in rank when cards' higher hand type is flush")
+    @DisplayName("return Flush in rank when cards' highest hand type is flush")
     void testGetRank() {
         Hand flush = new Hand(cardsWithFlush);
         assertEquals(Rank.FLUSH, flush.getRank());
