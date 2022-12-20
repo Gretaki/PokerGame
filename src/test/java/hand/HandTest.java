@@ -3,6 +3,7 @@ package hand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,7 +28,7 @@ class HandTest {
     void testGetHandWithoutHighestCardsInThreeOfAKindRank() {
         List<Card> highCards = List.of(new Card(13, Suit.H), new Card(13, Suit.D), new Card(13, Suit.S));
         Card secondToHighCard = new Card(6, Suit.D);
-        List<Card> cardsWithThreeOfAKind = Stream.concat(Stream.of( // TODO new ArrayList().addAll?
+        List<Card> cardsWithThreeOfAKind = Stream.concat(Stream.of(
             new Card(4, Suit.D), secondToHighCard), highCards.stream()).toList();
 
         Hand threeOfAKind = new Hand(cardsWithThreeOfAKind);
