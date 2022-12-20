@@ -10,9 +10,9 @@
 ### How the solution works:
 
 Main idea:
-* Input is from txt file.  
-* Main program is in Main class.  
-* Output is shown in console window.
+* Input is read from txt file (input.txt)  
+* Run main program in Main class  
+* Output is shown in console window
 
 Diagram:
 <p align="center">
